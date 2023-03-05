@@ -1,6 +1,7 @@
 import { LightningElement, wire, track, api } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
 import { getObjectInfo } from "lightning/uiObjectInfoApi";
+import { getSObjectValue } from '@salesforce/apex';
 import { updateRecord,getRecord, getFieldValue  } from 'lightning/uiRecordApi';
 
 import { refreshApex } from "@salesforce/apex";
@@ -111,7 +112,7 @@ export default class ContactDataTable extends NavigationMixin(
     if(!this.childFieldName || this.childFieldName == '') {
       return this.recordId
     }
-    return this.record.data ? getFieldValue(this.record.data, this.childFieldName) : '';
+    return this.record.data ? getSObjectValue(this.record.data, this.childFieldName) : '';
   }
 
   @wire(getRelatedFilesByRecordId, {
