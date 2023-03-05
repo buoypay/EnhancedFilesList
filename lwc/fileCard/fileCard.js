@@ -289,10 +289,10 @@ export default class ContactDataTable extends NavigationMixin(
     this.createDataTableColumns();
   }
 
-  async createDataTableColumns() {
+  createDataTableColumns() {
     try {
       if (this.filesData && this.objectInfoData.apiName === "ContentVersion") {
-        this.columns = await this.filteredColumnList.reduce(
+         this.filteredColumnList.reduce(
            async (accumulator, fieldValue) => {
             let typeAttribute;
             let type;
@@ -354,17 +354,21 @@ export default class ContactDataTable extends NavigationMixin(
             return accumulator;
           },
           []
-        );
-        this.columns.push({
-          type: "action",
-          typeAttributes: { rowActions: this.actions }
-        });
+        ).then((result) => {
+          this.columns = result;
+          this.columns.push({
+            type: "action",
+            typeAttributes: { rowActions: this.actions }
+          });
+          if(this.columns.length === 0){
+            this.displayColumns = false;
+          } else {
+            this.displayColumns = true;
+          }
+        }).catch(err => console.log(err));
+        
       }
-      if(this.columns.length === 0){
-        this.displayColumns = false;
-      } else {
-        this.displayColumns = true;
-      }
+    
     } catch (error) {
       console.log(error);
     }
