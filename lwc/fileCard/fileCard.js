@@ -8,6 +8,8 @@ import { refreshApex } from "@salesforce/apex";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import FORM_FACTOR from "@salesforce/client/formFactor";
 import getRelatedFilesByRecordId from "@salesforce/apex/FilesListController.getRelatedFilesByRecordId";
+import getPicklistValuesSimple from "@salesforce/apex/PicklistUtils.getPicklistValuesSimple";
+
 import getTotalCount from "@salesforce/apex/FilesListController.getTotalCount";
 
 export default class ContactDataTable extends NavigationMixin(
@@ -293,6 +295,7 @@ export default class ContactDataTable extends NavigationMixin(
           (accumulator, fieldValue) => {
             let typeAttribute;
             let type;
+            let picklistValues;
             const columnData = this.objectInfoData.fields[fieldValue];
 
             if (columnData.filterable) {
@@ -316,6 +319,11 @@ export default class ContactDataTable extends NavigationMixin(
               type = "email";
             } else if (columnData.dataType === "Picklist") {
               type = "picklist";
+              picklistValues = getPicklistValuesSimple(this.objectInfoData.apiName, columnData.apiName);
+              typeAttribute = {
+                options: picklistValues,
+                placeholder: 'bla'
+              };
             } else if (columnData.dataType === "Phone") {
               type = "phone";
             } else if (columnData.dataType === "Percent") {

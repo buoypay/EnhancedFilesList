@@ -49,7 +49,7 @@ global with sharing class PicklistUtils {
      * @throws System.InvalidParameterValueException if objectName or fieldName are invalid
      */
      @AuraEnabled(Cacheable=true)
-    global static List<Schema.PicklistEntry> getPicklistValues(
+    global static List<Schema.PicklistEntry> getPicklistValuesSimple(
         String objectName,
         String fieldName
     ) {
