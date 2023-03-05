@@ -352,7 +352,7 @@ export default class ContactDataTable extends NavigationMixin(
               label: columnData.label,
               fieldName: fieldValue,
               type: type,
-              editable: columnData.updateable,
+              editable: type != 'picklist' ? columnData.updateable : false,
               sortable: true,
               typeAttributes: typeAttribute
             });
