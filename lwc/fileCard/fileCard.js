@@ -329,7 +329,8 @@ export default class ContactDataTable extends NavigationMixin(
               console.log(JSON.stringify(picklistValues));
               typeAttribute = {
                 options: picklistValues,
-                placeholder: 'bla'
+                placeholder: 'bla',
+                name: fieldValue,
               };
             } else if (columnData.dataType === "Phone") {
               type = "phone";
