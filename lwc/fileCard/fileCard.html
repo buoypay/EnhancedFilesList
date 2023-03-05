@@ -99,7 +99,7 @@
               </p>
             </template>
           </div>
-          <div style={cardHeightStyle}>
+          <div onpicklistchange={handlePicklistChangedValue} style={cardHeightStyle}>
             <c-custom-data-table
               key-field="Id"
               id="ContentDocumentId"

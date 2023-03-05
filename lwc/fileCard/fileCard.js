@@ -378,6 +378,28 @@ export default class ContactDataTable extends NavigationMixin(
     }
   }
 
+  handlePicklistChangedValue(event) {
+    console.log(event);
+  }
+
+  updateDraftValues(updateItem) {
+    let draftValueChanged = false;
+    let copyDraftValues = JSON.parse(JSON.stringify(this.draftValues));
+    copyDraftValues.forEach((item) => {
+        if (item.Id === updateItem.Id) {
+            for (let field in updateItem) {
+                item[field] = updateItem[field];
+            }
+            draftValueChanged = true;
+        }
+    });
+    if (draftValueChanged) {
+        this.draftValues = [...copyDraftValues];
+    } else {
+        this.draftValues = [...copyDraftValues, updateItem];
+    }
+}
+
   handleSave(event) {
     const recordInputs = event.detail.draftValues.slice().map(draft => {
       const fields = Object.assign({}, draft);
