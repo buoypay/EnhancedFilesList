@@ -282,13 +282,14 @@ export default class ContactDataTable extends NavigationMixin(
     if (!this.minMobileColumns) {
       this.minMobileColumns = 3;
     }
+
   }
 
   dataTableRefresh(){
     this.createDataTableColumns();
   }
 
-  createDataTableColumns() {
+  async createDataTableColumns() {
     try {
       if (this.filesData && this.objectInfoData.apiName === "ContentVersion") {
         this.columns = this.filteredColumnList.reduce(
@@ -319,7 +320,7 @@ export default class ContactDataTable extends NavigationMixin(
               type = "email";
             } else if (columnData.dataType === "Picklist") {
               type = "picklist";
-              picklistValues = getPicklistValuesSimple({objectName:this.objectInfoData.apiName, fieldName: columnData.apiName});
+              picklistValues = await getPicklistValuesSimple({objectName:this.objectInfoData.apiName, fieldName: columnData.apiName});
               console.log(JSON.stringify(picklistValues));
               typeAttribute = {
                 options: picklistValues,
