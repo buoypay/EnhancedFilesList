@@ -330,6 +330,7 @@ export default class ContactDataTable extends NavigationMixin(
                 options: picklistValues,
                 placeholder: 'bla',
                 name: fieldValue,
+                context: { fieldName: 'Id' } 
               };
             } else if (columnData.dataType === "Phone") {
               type = "phone";
