@@ -194,12 +194,12 @@ global with sharing class PicklistUtils {
     }
 
     global class PicklistEntries {
-        global PicklistEntry defaultValue;
-        global List<PicklistEntry> values;
+        @AuraEnabled global PicklistEntry defaultValue;
+        @AuraEnabled global List<PicklistEntry> values;
     }
 
     global class PicklistEntry {
-        global String label;
-        global String value;
+        @AuraEnabled  global String label;
+        @AuraEnabled  global String value;
     }
 }
