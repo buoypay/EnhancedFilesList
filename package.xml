@@ -8,7 +8,7 @@
         <members>FilesListController</members>
         <members>FilesListControllerTest</members>
         <members>PicklistUtils</members>
-        <members>PicklistUtilsTest</members> 
+        <members>PicklistUtilsTests</members> 
         <name>ApexClass</name>
     </types>
     <types>

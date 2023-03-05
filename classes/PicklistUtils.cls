@@ -19,7 +19,6 @@ global with sharing class PicklistUtils {
      * @param sObjectType the object such as Account.sObjectType
      * @param field the object field that is a picklist such as Account.Industry
      */
-     @AuraEnabled(Cacheable=true)
     public static List<Schema.PicklistEntry> getPicklistValues(
         sObjectType sObjectType,
         Schema.sObjectField field
@@ -96,7 +95,6 @@ global with sharing class PicklistUtils {
      * @param recordTypeId
      * @param fieldName
      */
-     @AuraEnabled(Cacheable=true)
     global static PicklistEntries getPicklistValues(
         String objectName,
         Id recordTypeId,
@@ -183,7 +181,6 @@ global with sharing class PicklistUtils {
      * Return active picklist entries
      * @param entries list of picklist entries
      */
-     @AuraEnabled(Cacheable=true)
     private static List<Schema.PicklistEntry> getActivePicklistEntries(
         List<Schema.PicklistEntry> entries
     ) {
