@@ -15,7 +15,7 @@ global class PicklistUtilsTests {
     @isTest
     static void getPicklistValues_works_with_strings() {
         Test.startTest();
-        List<Schema.PicklistEntry> entries = PicklistUtils.getPicklistValuesSimple(
+        List<PicklistEntryWrapper> entries = PicklistUtils.getPicklistValuesSimple(
             'Account',
             'Industry'
         );
