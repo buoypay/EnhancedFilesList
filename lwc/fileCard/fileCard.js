@@ -326,7 +326,6 @@ export default class ContactDataTable extends NavigationMixin(
             } else if (columnData.dataType === "Picklist") {
               type = "picklist";
               picklistValues = await getPicklistValuesSimple({objectName:this.objectInfoData.apiName, fieldName: columnData.apiName});
-              console.log(JSON.stringify(picklistValues));
               typeAttribute = {
                 options: picklistValues,
                 placeholder: 'bla',
@@ -381,6 +380,7 @@ export default class ContactDataTable extends NavigationMixin(
 
   handlePicklistChangedValue(event) {
     console.log(event);
+    console.log(this.draftValues);
   }
 
   updateDraftValues(updateItem) {
