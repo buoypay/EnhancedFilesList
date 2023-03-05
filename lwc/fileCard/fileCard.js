@@ -292,7 +292,7 @@ export default class ContactDataTable extends NavigationMixin(
   createDataTableColumns() {
     try {
       if (this.filesData && this.objectInfoData.apiName === "ContentVersion") {
-         this.filteredColumnList.reduce(
+         let promise = this.filteredColumnList.reduce(
            async (accumulator, fieldValue) => {
             let typeAttribute;
             let type;
@@ -354,7 +354,8 @@ export default class ContactDataTable extends NavigationMixin(
             return accumulator;
           },
           Promise.resolve([])
-        ).then((result) => {
+        );
+        promise.then((result) => {
           this.columns = result;
           this.columns.push({
             type: "action",
