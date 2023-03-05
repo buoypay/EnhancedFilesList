@@ -8,7 +8,7 @@ export default class UploadFilesModal extends LightningElement {
 
     @api childFieldName;
 
-    @wire(getRecord, { recordId: '$recordId', 'Full' })
+    @wire(getRecord, { recordId: '$recordId', layoutTypes: 'Full' })
     record;
 
     get childFieldId() {

@@ -37,7 +37,7 @@ export default class MobilePanel extends NavigationMixin(LightningElement) {
   @track totalFilesCount;
 
 
-  @wire(getRecord, { recordId: '$recordId', 'Full' })
+  @wire(getRecord, { recordId: '$recordId', layoutTypes: 'Full' })
   record;
 
   get childFieldId() {

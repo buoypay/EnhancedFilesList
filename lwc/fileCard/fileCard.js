@@ -104,7 +104,7 @@ export default class ContactDataTable extends NavigationMixin(
   ];
 
 
-  @wire(getRecord, { recordId: '$recordId', 'Full' })
+  @wire(getRecord, { recordId: '$recordId', layoutTypes: 'Full' })
   record;
 
   get childFieldId() {
