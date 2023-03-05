@@ -297,7 +297,8 @@ export default class ContactDataTable extends NavigationMixin(
     try {
       if (this.filesData && this.objectInfoData.apiName === "ContentVersion") {
          let result = await this.filteredColumnList.reduce(
-           async (accumulator, fieldValue) => {
+           async (previousPromise, fieldValue) => {
+            let accumulator = await previousPromise;
             let typeAttribute;
             let type;
             let picklistValues;
