@@ -353,7 +353,7 @@ export default class ContactDataTable extends NavigationMixin(
             });
             return accumulator;
           },
-          Promise.resolve([])
+          Promise.resolve(accumulator)
         );
         promise.then((result) => {
           this.columns = result;
