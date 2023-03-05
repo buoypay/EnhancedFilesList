@@ -290,7 +290,7 @@ export default class ContactDataTable extends NavigationMixin(
   }
 
   createDataTableColumns() {
-    this._createDataTableColumns().then();
+    this._createDataTableColumns();
   }
 
   async _createDataTableColumns() {
