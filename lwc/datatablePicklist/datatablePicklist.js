@@ -13,5 +13,10 @@ export default class DatatablePicklist extends LightningElement {
     @api name;
     showPicklist = false;
     picklistValueChanged = false;
-
+  //loads the custom CSS for picklist custom type on lightning datatable
+  renderedCallback() {
+    Promise.all([
+        loadStyle(this, CustomDataTableResource),
+    ]).then(() => { });
+    }
 }
