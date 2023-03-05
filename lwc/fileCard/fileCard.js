@@ -319,7 +319,7 @@ export default class ContactDataTable extends NavigationMixin(
               type = "email";
             } else if (columnData.dataType === "Picklist") {
               type = "picklist";
-              picklistValues = getPicklistValuesSimple(this.objectInfoData.apiName, columnData.apiName);
+              picklistValues = getPicklistValuesSimple({objectName:this.objectInfoData.apiName, fieldName: columnData.apiName});
               typeAttribute = {
                 options: picklistValues,
                 placeholder: 'bla'
