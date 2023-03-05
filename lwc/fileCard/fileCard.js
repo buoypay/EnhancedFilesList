@@ -314,6 +314,8 @@ export default class ContactDataTable extends NavigationMixin(
               type = "number";
             } else if (columnData.dataType === "Email") {
               type = "email";
+            } else if (columnData.dataType === "Picklist") {
+              type = "picklist";
             } else if (columnData.dataType === "Phone") {
               type = "phone";
             } else if (columnData.dataType === "Percent") {

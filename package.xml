@@ -18,7 +18,9 @@
         <members>emptyIllustration</members>
         <members>fileCard</members>
         <members>mobileDataTable</members>
-        <members>mobilePanel</members>
+        <members>mobileDataTable</members>
+        <members>customDataTable</members>
+        <members>datatablePicklist</members>
         <members>mobileSortButtonMenu</members>
         <members>noFilesView</members>
         <members>paginator</members>

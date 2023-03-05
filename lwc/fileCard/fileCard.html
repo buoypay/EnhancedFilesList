@@ -100,7 +100,7 @@
             </template>
           </div>
           <div style={cardHeightStyle}>
-            <lightning-datatable
+            <c-custom-datatable
               key-field="Id"
               id="ContentDocumentId"
               data={paginatedData}
@@ -114,7 +114,7 @@
               onrowaction={handleRowAction}
               onrowselection={getSelectedRows}
             >
-            </lightning-datatable>
+            </c-custom-datatable>
           </div>
           <div class="slds-m-around_medium slds-align_absolute-center">
             <c-paginator
