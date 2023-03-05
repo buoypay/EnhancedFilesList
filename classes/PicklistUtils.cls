@@ -5,9 +5,6 @@ public with sharing class PicklistUtils {
     // Cache for dynamic Apex calls
     private final static Map<String, List<Schema.PicklistEntry>> apexCache = new Map<String, List<Schema.PicklistEntry>>();
 
-    // Cache for UI API calls
-    private final static Map<String, PicklistEntries> uiApiCache = new Map<String, PicklistEntries>();
-
     // Cache for case status values
     private static List<CaseStatus> caseStatuses;
 
@@ -89,66 +86,6 @@ public with sharing class PicklistUtils {
     }
 
     /**
-     * Retrieves active picklist values for a given object, record type and field
-     * This method uses the UI API and supports record types.
-     * @param objectName
-     * @param recordTypeId
-     * @param fieldName
-     */
-    public static PicklistEntries getPicklistValues(
-        String objectName,
-        Id recordTypeId,
-        String fieldName
-    ) {
-        String requestUrl =
-            URL.getSalesforceBaseUrl().toExternalForm() +
-            '/services/data/v51.0/ui-api/object-info/' +
-            objectName +
-            '/picklist-values/' +
-            recordTypeId +
-            '/' +
-            fieldName;
-
-        // Try to get entries from cache
-        PicklistEntries entries = uiApiCache.get(requestUrl);
-        if (entries == null) {
-            // Prepare UI API request
-            HttpRequest request = new HttpRequest();
-            request.setMethod('GET');
-            request.setHeader(
-                'Authorization',
-                'Bearer ' + UserInfo.getSessionId()
-            );
-            request.setEndpoint(requestUrl);
-            // Call UI API
-            try {
-                HttpResponse httpResponse = new Http().send(request);
-                if (httpResponse.getStatusCode() == 200) {
-                    // Parse JSON response into PicklistEntries
-                    entries = (PicklistEntries) JSON.deserialize(
-                        httpResponse.getBody(),
-                        PicklistEntries.class
-                    );
-                    // Cache entries
-                    uiApiCache.put(requestUrl, entries);
-                } else {
-                    throw new CalloutException(
-                        'HTTP ' +
-                            httpResponse.getStatusCode() +
-                            ' while calling UI API, Response: ' +
-                            httpResponse.getBody()
-                    );
-                }
-            } catch (System.Exception e) {
-                System.debug('ERROR: ' + e);
-                throw e;
-            }
-        }
-
-        return entries;
-    }
-
-    /**
      * Gets all case status values for both closed AND open cases
      */
     public static List<CaseStatus> getCaseStatusValues() {
@@ -203,16 +140,6 @@ public with sharing class PicklistUtils {
         
         }
         return wrapped;
-    }
-
-    global class PicklistEntries {
-         global PicklistEntry defaultValue;
-        global List<PicklistEntry> values;
-    }
-
-    global class PicklistEntry {
-         global String label;
-         global String value;
     }
 
     public class PicklistEntryWrapper {

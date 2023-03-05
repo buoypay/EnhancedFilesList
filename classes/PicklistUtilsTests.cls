@@ -63,47 +63,7 @@ global class PicklistUtilsTests {
         Test.stopTest();
     }
 
-    @isTest
-    static void getPicklistValuesWithRecordType_works() {
-        Test.setMock(
-            HttpCalloutMock.class,
-            new MockSimpleHttpResponse(
-                200,
-                '{"controllerValues": {}, "defaultValue": {"label": "Medium", "value": "Medium"}, "values": [{"label": "Medium","value": "Medium"}]}'
-            )
-        );
-
-        Test.startTest();
-        PicklistUtils.PicklistEntries entries = PicklistUtils.getPicklistValues(
-            'a',
-            '012000000000000AAA',
-            'b'
-        );
-        Test.stopTest();
-
-        System.assertEquals(1, entries.values.size());
-    }
-
-    @isTest
-    static void getPicklistValuesWithRecordType_fails_when_error_code() {
-        Test.setMock(
-            HttpCalloutMock.class,
-            new MockSimpleHttpResponse(404, '')
-        );
-
-        Test.startTest();
-        try {
-            PicklistUtils.getPicklistValues('a', '012000000000000AAA', 'c');
-            System.assert(false, 'Exception was expected');
-        } catch (Exception e) {
-            System.assert(
-                e instanceof CalloutException,
-                'Expected CalloutException, got ' + e
-            );
-        }
-        Test.stopTest();
-    }
-
+  
     @isTest
     static void getCaseStatusValues_works_with_closed_cases() {
         Test.startTest();
