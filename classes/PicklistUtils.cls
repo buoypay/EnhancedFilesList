@@ -1,7 +1,7 @@
 /**
  * Utility class for working with Picklists
  */
-global with sharing class PicklistUtils {
+public with sharing class PicklistUtils {
     // Cache for dynamic Apex calls
     private final static Map<String, List<Schema.PicklistEntry>> apexCache = new Map<String, List<Schema.PicklistEntry>>();
 
@@ -95,7 +95,7 @@ global with sharing class PicklistUtils {
      * @param recordTypeId
      * @param fieldName
      */
-    global static PicklistEntries getPicklistValues(
+    public static PicklistEntries getPicklistValues(
         String objectName,
         Id recordTypeId,
         String fieldName
@@ -151,7 +151,7 @@ global with sharing class PicklistUtils {
     /**
      * Gets all case status values for both closed AND open cases
      */
-    global static List<CaseStatus> getCaseStatusValues() {
+    public static List<CaseStatus> getCaseStatusValues() {
         if (caseStatuses == null) {
             caseStatuses = [
                 SELECT Id, MasterLabel, IsClosed, SortOrder, ApiName, IsDefault
@@ -166,7 +166,7 @@ global with sharing class PicklistUtils {
      * Gets case status values for closed OR open cases
      * @param isCaseClosed whether to return values for open cases or closed cases
      */
-    global static List<CaseStatus> getCaseStatusValues(Boolean isCaseClosed) {
+    public static List<CaseStatus> getCaseStatusValues(Boolean isCaseClosed) {
         List<CaseStatus> allValues = getCaseStatusValues();
         List<CaseStatus> requestedValues = new List<CaseStatus>();
         for (CaseStatus value : allValues) {
@@ -200,7 +200,7 @@ global with sharing class PicklistUtils {
             wrapper.label = entry.label;
             wrapper.value = entry.value;
             wrapped.add(wrapper);
-            
+        
         }
         return wrapped;
     }
