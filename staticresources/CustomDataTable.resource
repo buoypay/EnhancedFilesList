@@ -2,6 +2,12 @@
     width: 100%
 }
 
+
+.slds-select {
+    border: 0;
+    border-radius: 0;
+}
+
 .slds-grid .slds-truncate {
     width: 100%
 }
