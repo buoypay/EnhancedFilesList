@@ -84,7 +84,7 @@ export default class ContactDataTable extends NavigationMixin(
   @api pageSize = 10;
   @track totalRecordCount = 0;
   @track totalPage = 0;
-  @track paginatedData = [];
+  @track paginatedlightning = [];
   @track displayPreviousIcon = true;
   @track displayNextIcon = true;
   @track cardHeightStyle;
@@ -94,11 +94,11 @@ export default class ContactDataTable extends NavigationMixin(
   @api flexipageRegionWidth;
 
   files;
-  filesData = [];
+  fileslightning = [];
   filesError;
 
   objectInfo;
-  objectInfoData = [];
+  objectInfolightning = [];
   objectInfoError;
 
   @track actions = [
@@ -114,7 +114,7 @@ export default class ContactDataTable extends NavigationMixin(
     if(!this.childFieldName || this.childFieldName == '') {
       return this.recordId
     }
-    return this.record.data ? this.record.data.fields[this.childFieldName].value : '';
+    return this.record.lightning ? this.record.lightning.fields[this.childFieldName].value : '';
   }
 
   @wire(getRelatedFilesByRecordId, {
