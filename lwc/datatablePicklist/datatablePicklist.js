@@ -19,4 +19,32 @@ export default class DatatablePicklist extends LightningElement {
         loadStyle(this, CustomDataTableResource),
     ]).then(() => { });
     }
+
+    get picklistOptions() {
+        if (this.options) {
+            return this.options.map((vals) => {
+                return {
+                    ...vals,
+                    selected:
+                        vals.value === this.value ? true : false
+                };
+            });
+        }
+        return [];
+    }
+
+    handleSelect(event) {
+
+        this.value = event.target.value;
+
+        this.dispatchEvent(new CustomEvent('picklistchanged', {
+            composed: true,
+            bubbles: true,
+            cancelable: true,
+            detail: {
+                data: { context: this.context, value: this.value, name: this.name}
+            }
+        }));
+
+    }
 }

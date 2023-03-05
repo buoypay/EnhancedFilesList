@@ -1,10 +1,13 @@
 <template>
-            <lightning-combobox 
-                name={name} 
-                value={value} 
-                placeholder={placeholder} 
-                options={options}
-                variant = "label-hidden"
-                dropdown-alignment="auto">
-            </lightning-combobox>
+    <div class ="slds-select" onchange={handleSelect}>
+    <select class="slds-select" id="select-01">
+     <template for:each={picklistOptions} for:item="picklist">
+        <option key={picklist.value} 
+                value={picklist.label} 
+                selected={picklist.selected} >
+                {picklist.label}
+            </option>
+     </template>
+    </select>
+</div>
 </template>
