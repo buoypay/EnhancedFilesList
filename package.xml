@@ -32,7 +32,7 @@
     </types>
     <types>
         <members>openRoad</members>
-        <members>customDataTable</members>
+        <members>CustomDataTable</members>
         <name>StaticResource</name>
     </types>
     <version>48.0</version>
