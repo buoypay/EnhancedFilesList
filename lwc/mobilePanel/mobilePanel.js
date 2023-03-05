@@ -41,10 +41,10 @@ export default class MobilePanel extends NavigationMixin(LightningElement) {
   record;
 
   get childFieldId() {
-    if(!childFieldName || childFieldName == '') {
+    if(!this.childFieldName || this.childFieldName == '') {
       return this.recordId
     }
-    return getFieldValue(this.record.data, childFieldName);
+    return getFieldValue(this.record.data, this.childFieldName);
   }
   
 

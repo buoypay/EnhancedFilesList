@@ -108,10 +108,10 @@ export default class ContactDataTable extends NavigationMixin(
   record;
 
   get childFieldId() {
-    if(!childFieldName || childFieldName == '') {
+    if(!this.childFieldName || this.childFieldName == '') {
       return this.recordId
     }
-    return getFieldValue(this.record.data, childFieldName);
+    return getFieldValue(this.record.data, this.childFieldName);
   }
 
   @wire(getRelatedFilesByRecordId, {
