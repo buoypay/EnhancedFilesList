@@ -248,14 +248,14 @@
 
   <template if:true={uploadFilesModal}>
     <c-upload-files-modal
-      record-id={recordId}
+      record-id={childFieldId}
       onselected={handleFileModalClosed}
     >
     </c-upload-files-modal>
   </template>
   <template if:true={downloadFilesModal}>
     <c-download-files-modal
-      record-id={recordId}
+      record-id={childFieldId}
       file-size={fileSize}
       selected-files={selectedRows}
       download-type={downloadType}

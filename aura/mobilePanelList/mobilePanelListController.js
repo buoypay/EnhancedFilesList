@@ -5,6 +5,9 @@
         var recordId = myPageRef.state.c__recordId;
         component.set("v.recordId", recordId);
 
+        var childFieldName = myPageRef.state.c__childFieldName;
+        component.set("v.childFieldName", childFieldName);
+
         var label = myPageRef.state.c__label;
         component.set("v.label", label);
 
