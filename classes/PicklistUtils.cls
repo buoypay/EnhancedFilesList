@@ -11,7 +11,7 @@ global with sharing class PicklistUtils {
     // Cache for case status values
     private static List<CaseStatus> caseStatuses;
 
-    /*
+    /**
      * Retrieves picklist values for a given object and field
      * This method uses dynamic Apex and does not support record types.
      * Example:
