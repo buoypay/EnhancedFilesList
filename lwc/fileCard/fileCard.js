@@ -386,8 +386,10 @@ export default class ContactDataTable extends NavigationMixin(
       this.updateDraftValues(event.detail.draftValues[0])
     }
     else if (event.type == 'picklistchanged'){
-      let draft = {...event.detail.data};
-      draft.Id = draft.context;
+      const data = event.detail.data;
+      let draft = {};
+      draft.Id = data.context;
+      draft[data.name] = data.value;
 
       this.updateDraftValues(draft)
     }
