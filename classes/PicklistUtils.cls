@@ -211,8 +211,8 @@ global with sharing class PicklistUtils {
     }
 
     global class PicklistEntry {
-         public String label;
-         public String value;
+         global String label;
+         global String value;
     }
 
     public class PicklistEntryWrapper {
