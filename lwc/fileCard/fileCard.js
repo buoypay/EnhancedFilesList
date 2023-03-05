@@ -111,7 +111,7 @@ export default class ContactDataTable extends NavigationMixin(
     if(!this.childFieldName || this.childFieldName == '') {
       return this.recordId
     }
-    return getFieldValue(this.record.data, this.childFieldName);
+    return this.record.data ? getFieldValue(this.record.data, this.childFieldName) : '';
   }
 
   @wire(getRelatedFilesByRecordId, {
