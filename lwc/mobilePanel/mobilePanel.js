@@ -2,6 +2,7 @@ import { LightningElement, api, track, wire } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import { NavigationMixin } from "lightning/navigation";
 import { getObjectInfo } from "lightning/uiObjectInfoApi";
+import { getRecord, getFieldValue  } from 'lightning/uiRecordApi';
 
 export default class MobilePanel extends NavigationMixin(LightningElement) {
   @api recordId;
@@ -16,6 +17,7 @@ export default class MobilePanel extends NavigationMixin(LightningElement) {
   @api uploadFiles;
   @api displayNextIcon;
   @api page;
+  @api childFieldName;
 
   @track mobileSortDirection = 'asc';
   @track sortedBy;
@@ -33,6 +35,18 @@ export default class MobilePanel extends NavigationMixin(LightningElement) {
   @track totalPage = 0;
   @track paginatedData = [];
   @track totalFilesCount;
+
+
+  @wire(getRecord, { recordId: '$recordId', 'Full' })
+  record;
+
+  get childFieldId() {
+    if(!childFieldName || childFieldName == '') {
+      return this.recordId
+    }
+    return getFieldValue(this.record.data, childFieldName);
+  }
+  
 
   @wire(getObjectInfo, {
     objectApiName: "ContentVersion"

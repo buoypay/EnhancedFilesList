@@ -18,6 +18,7 @@
             </supportedFormFactors>
             <property name="label" type="String" label="Card Label" default="Enhanced Files" description="The title of the card component" />
             <property name="icon" type="String" label="Card Icon" default="standard:file" description="The Lightning Design System name of the icon"/>
+            <property name="childFieldName" type="String" label="Child Field Name" default="" description="Optional" />
             <property name="uploadFiles" type="Boolean" label="Upload Files" default="false" description="Allow users to upload files" />
             <property name="downloadFiles" type="Boolean" label="Download Multiple Files" default="false" description="Allow users to download multiple files" />
             <property name="cardHeight" type="Integer" label="Card Height" default="300" description="Set the height of the component" />

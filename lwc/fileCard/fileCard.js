@@ -1,7 +1,8 @@
 import { LightningElement, wire, track, api } from "lwc";
 import { NavigationMixin } from "lightning/navigation";
 import { getObjectInfo } from "lightning/uiObjectInfoApi";
-import { updateRecord } from "lightning/uiRecordApi";
+import { updateRecord,getRecord, getFieldValue  } from 'lightning/uiRecordApi';
+
 import { refreshApex } from "@salesforce/apex";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import FORM_FACTOR from "@salesforce/client/formFactor";
@@ -21,6 +22,8 @@ export default class ContactDataTable extends NavigationMixin(
   @api cardHeight;
   @api minMobileColumns;
   @api communityComponentWidth;
+  @api childFieldName;
+
 
   @api column1;
   @api column2;
@@ -100,8 +103,19 @@ export default class ContactDataTable extends NavigationMixin(
     { label: "Preview File", name: "expand_image" }
   ];
 
+
+  @wire(getRecord, { recordId: '$recordId', 'Full' })
+  record;
+
+  get childFieldId() {
+    if(!childFieldName || childFieldName == '') {
+      return this.recordId
+    }
+    return getFieldValue(this.record.data, childFieldName);
+  }
+
   @wire(getRelatedFilesByRecordId, {
-    recordId: "$recordId",
+    recordId: "$childFieldId",
     fieldsParameter: "$generateFieldsParameter",
     queryLimit: "$queryLimit",
     searchTerm: "$searchTerm"
@@ -205,7 +219,7 @@ export default class ContactDataTable extends NavigationMixin(
     }
   }
 
-  @wire(getTotalCount, { recordId: "$recordId" })
+  @wire(getTotalCount, { recordId: "$childFieldId" })
   totalWiredCount({ error, data }) {
     if (data) {
       this.TOTAL_COUNT = data;

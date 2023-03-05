@@ -2,6 +2,7 @@
   <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
   <aura:handler name="change" value="{!v.pageReference}" action="{!c.reInit}" />
   <aura:attribute name="recordId" type="String" />
+  <aura:attribute name="childFieldName" type="String" />
   <aura:attribute name="label" type="String" />
   <aura:attribute name="icon" type="String" />
   <aura:attribute name="columns" type="Object" />
@@ -20,6 +21,7 @@
       recordId="{!v.recordId}"
       label="{!v.label}"
       icon="{!v.icon}"
+      childFieldName="{!v.childFieldName}"
       columns="{!v.columns}"
       filesData="{!v.filesData}"
       minMobileColumns="{!v.minMobileColumns}"

@@ -1,9 +1,24 @@
 import { LightningElement, api } from 'lwc';
+import { getRecord, getFieldValue  } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 export default class UploadFilesModal extends LightningElement {
 
     @api recordId;
+
+    @api childFieldName;
+
+    @wire(getRecord, { recordId: '$recordId', 'Full' })
+    record;
+
+    get childFieldId() {
+      if(!childFieldName || childFieldName == '') {
+        return this.recordId
+      }
+      return getFieldValue(this.record.data, childFieldName);
+    }
+
+
 
     closeModal(){
         this.dispatchEvent(new CustomEvent('selected'));
