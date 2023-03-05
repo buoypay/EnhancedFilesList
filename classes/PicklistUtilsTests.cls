@@ -15,7 +15,7 @@ global class PicklistUtilsTests {
     @isTest
     static void getPicklistValues_works_with_strings() {
         Test.startTest();
-        List<Schema.PicklistEntry> entries = PicklistUtils.getPicklistValues(
+        List<Schema.PicklistEntry> entries = PicklistUtils.getPicklistValuesSimple(
             'Account',
             'Industry'
         );
@@ -28,7 +28,7 @@ global class PicklistUtilsTests {
     static void getPicklistValues_fails_when_invalid_objectName() {
         Test.startTest();
         try {
-            PicklistUtils.getPicklistValues('Unknown', 'Industry');
+            PicklistUtils.getPicklistValuesSimple('Unknown', 'Industry');
             System.assert(false, 'Exception was expected');
         } catch (Exception e) {
             System.assert(
@@ -48,7 +48,7 @@ global class PicklistUtilsTests {
     static void getPicklistValues_fails_when_invalid_fieldName() {
         Test.startTest();
         try {
-            PicklistUtils.getPicklistValues('Account', 'Unknown');
+            PicklistUtils.getPicklistValuesSimple('Account', 'Unknown');
             System.assert(false, 'Exception was expected');
         } catch (Exception e) {
             System.assert(
