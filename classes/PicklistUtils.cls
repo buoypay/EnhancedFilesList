@@ -3,7 +3,7 @@
  */
 global with sharing class PicklistUtils {
     // Cache for dynamic Apex calls
-    private final static Map<String, List<PicklistEntry>> apexCache = new Map<String, List<PicklistEntry>>();
+    private final static Map<String, List<Schema.PicklistEntry>> apexCache = new Map<String, List<Schema.PicklistEntry>>();
 
     // Cache for UI API calls
     private final static Map<String, PicklistEntries> uiApiCache = new Map<String, PicklistEntries>();
@@ -15,11 +15,11 @@ global with sharing class PicklistUtils {
      * Retrieves picklist values for a given object and field
      * This method uses dynamic Apex and does not support record types.
      * Example:
-     *   List<PicklistEntry> entries = PicklistUtils.getPicklistValues(Account.sObjectType, Account.Industry);
+     *   List<Schema.PicklistEntry> entries = PicklistUtils.getPicklistValues(Account.sObjectType, Account.Industry);
      * @param sObjectType the object such as Account.sObjectType
      * @param field the object field that is a picklist such as Account.Industry
      */
-    public static List<PicklistEntry> getPicklistValues(
+    public static List<Schema.PicklistEntry> getPicklistValues(
         sObjectType sObjectType,
         Schema.sObjectField field
     ) {
@@ -28,7 +28,7 @@ global with sharing class PicklistUtils {
             String.valueOf(sObjectType) +
             '.' +
             String.valueOf(field);
-        List<PicklistEntry> entries = apexCache.get(cacheKey);
+        List<Schema.PicklistEntry> entries = apexCache.get(cacheKey);
         if (entries == null) {
             // Get picklist values
             entries = field.getDescribe().getPicklistValues();
@@ -48,13 +48,13 @@ global with sharing class PicklistUtils {
      * @throws System.InvalidParameterValueException if objectName or fieldName are invalid
      */
      @AuraEnabled(Cacheable=true)
-    public static List<PicklistEntry> getPicklistValuesSimple(
+    global static List<PicklistEntryWrapper> getPicklistValuesSimple(
         String objectName,
         String fieldName
     ) {
         // Try to get entries from cache
         String cacheKey = objectName + '.' + fieldName;
-        List<PicklistEntry> entries = apexCache.get(cacheKey);
+        List<Schema.PicklistEntry> entries = apexCache.get(cacheKey);
         if (entries == null) {
             // Use dynamic Apex to get object description
             // Schema.describeSObjects throws System.InvalidParameterValueException if objectName is invalid
@@ -85,7 +85,7 @@ global with sharing class PicklistUtils {
             apexCache.put(cacheKey, entries);
         }
 
-        return entries;
+        return returnWrappedEntries(entries);
     }
 
     /**
@@ -181,11 +181,11 @@ global with sharing class PicklistUtils {
      * Return active picklist entries
      * @param entries list of picklist entries
      */
-    private static List<PicklistEntry> getActivePicklistEntries(
-        List<PicklistEntry> entries
+    private static List<Schema.PicklistEntry> getActivePicklistEntries(
+        List<Schema.PicklistEntry> entries
     ) {
-        List<PicklistEntry> activeEntries = new List<PicklistEntry>();
-        for (PicklistEntry entry : entries) {
+        List<Schema.PicklistEntry> activeEntries = new List<Schema.PicklistEntry>();
+        for (Schema.PicklistEntry entry : entries) {
             if (entry.isActive()) {
                 activeEntries.add(entry);
             }
@@ -193,12 +193,29 @@ global with sharing class PicklistUtils {
         return activeEntries;
     }
 
-    global class PicklistEntries {
-             global PicklistEntry defaultValue;
-             global List<PicklistEntry> values;
+    private static List<PicklistEntryWrapper> returnWrappedEntries(List<Schema.PicklistEntry> entries) {
+        List<PicklistEntryWrapper> wrapped = new List<PicklistEntryWrapper>();
+        for (Schema.PicklistEntry entry : entries) {
+            PicklistEntryWrapper wrapper = new PicklistEntryWrapper();
+            wrapper.label = entry.label;
+            wrapper.value = entry.value;
+            wrapped.add(wrapper);
+            
+        }
+        return wrapped;
     }
 
-    public class PicklistEntry {
+    global class PicklistEntries {
+         global PicklistEntry defaultValue;
+        global List<PicklistEntry> values;
+    }
+
+    global class PicklistEntry {
+         public String label;
+         public String value;
+    }
+
+    public class PicklistEntryWrapper {
         @AuraEnabled public String label;
         @AuraEnabled public String value;
     }
