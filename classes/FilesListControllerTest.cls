@@ -14,7 +14,8 @@ private class FilesListControllerTest {
             Title = 'Test',
             PathOnClient = 'Test.jpg',
             VersionData = Blob.valueOf('Test Content Data'),
-            IsMajorVersion = true
+            IsMajorVersion = true,
+            Category__c = 'CR 12'
         );
         insert cv;
 
@@ -39,7 +40,8 @@ private class FilesListControllerTest {
             Title = 'Test',
             PathOnClient = 'Test.jpg',
             VersionData = Blob.valueOf('Test Content Data'),
-            IsMajorVersion = true
+            IsMajorVersion = true,
+            Category__c = 'CR 12'
         );
         insert cv;
 
