@@ -9,6 +9,7 @@
         <members>FilesListControllerTest</members>
         <members>PicklistUtils</members>
         <members>PicklistUtilsTests</members> 
+        <members>ComplianceContactApexDataSource</members>
         <name>ApexClass</name>
     </types>
     <types>
