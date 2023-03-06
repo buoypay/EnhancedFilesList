@@ -16,9 +16,8 @@ global with sharing class ComplianceContactApexDataSource implements smartlists.
         System.debug('records ' + records);
         for (AggregateResult record : records) {
             Map<String, Object> record = new Map<String, Object>();
-            record.put('RowKey', (String)record.get('Id')); // Note: Required field for 
-            identifying a unique record
-            record.put('Id', record.get('Id')); // Note: A field called Id is required in the list for using flow actions
+            record.put('RowKey', (String)record.get('Id'));
+            record.put('Id', record.get('Id')); 
             record.put('Account.Name', record.get('AccountName'));
             record.put('Contact.Name', record.get('ContactName'));
             record.put('AccountId', record.get('AccountId'));
