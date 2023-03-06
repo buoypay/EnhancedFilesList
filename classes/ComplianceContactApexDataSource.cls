@@ -14,18 +14,18 @@ global with sharing class ComplianceContactApexDataSource implements smartlists.
     private List<Map<String, Object>> buildRecords(AggregateResult[] records) {
         List<Map<String, Object>> results = new List<Map<String, Object>>();
         System.debug('records ' + records);
-        for (AggregateResult record : records) {
+        for (AggregateResult result : records) {
             Map<String, Object> record = new Map<String, Object>();
-            record.put('RowKey', (String)record.get('Id'));
-            record.put('Id', record.get('Id')); 
-            record.put('Account.Name', record.get('AccountName'));
-            record.put('Contact.Name', record.get('ContactName'));
-            record.put('AccountId', record.get('AccountId'));
-            record.put('ContactId', record.get('ContactId'));
-            record.put('Transaction_Limit__c', record.get('Transaction_Limit__c'));
-            record.put('Date_of_Signing__c', record.get('Date_of_Signing__c'));
-            record.put('Signed_Agreement__c', record.get('Signed_Agreement__c'));
-            record.put('Roles', record.get('Roles'));
+            record.put('RowKey', (String)result.get('Id'));
+            record.put('Id', result.get('Id')); 
+            record.put('Account.Name', result.get('AccountName'));
+            record.put('Contact.Name', result.get('ContactName'));
+            record.put('AccountId', result.get('AccountId'));
+            record.put('ContactId', result.get('ContactId'));
+            record.put('Transaction_Limit__c', result.get('Transaction_Limit__c'));
+            record.put('Date_of_Signing__c', result.get('Date_of_Signing__c'));
+            record.put('Signed_Agreement__c', result.get('Signed_Agreement__c'));
+            record.put('Roles', result.get('Roles'));
 
             results.add(record);
         }
