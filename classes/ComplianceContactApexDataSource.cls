@@ -1,13 +1,16 @@
 global with sharing class ComplianceContactApexDataSource implements smartlists.SmartListApexSourceInterface2 {
     public List<Map<String, Object>> getPage(smartlists.SmartListApexSourceGetPage parms) {
         String query = 'SELECT AccountId, Account.Name ContactId, Contact.Name	,Transaction_Limit__c,  Date_of_Signing__c, Roles, Signed_Agreement__c, Id FROM AccountContactRelation WHERE ' + parms.getFilter();
-        query.replace('parentId', parms.getParentId());
+        query = query.replace('parentId', parms.getParentId());
+
+        AggregateResult[] records = Database.query(query);
+        return buildRecords(records);
     
     }
     public List<Map<String, Object>> getRecord(String id) {
         String query = 'SELECT AccountId, Account.Name ContactId, Contact.Name	,Transaction_Limit__c, Date_of_Signing__c, Roles, Signed_Agreement__c, Id FROM AccountContactRelation WHERE Id = ' + id;
         AggregateResult[] records = Database.query(query);
-        return buildRecords(recors)
+        return buildRecords(records);
     
     }
 
